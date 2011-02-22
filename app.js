@@ -102,7 +102,8 @@ app.get('/', function(req, res){ res.send(to_form(decode(specs))) })
 // recieve the form, and save to a file with the submitter's url
 app.post('/', function(req, res){
   var answer = req.body
-  answer.url = req.connection.remoteAddress
+  answer.ip = req.header('x-forwarded-for') || req.connection.remoteAddress
+  answer.time = Date.now()
   log.write(JSON.stringify(answer)+'\n')
   res.redirect('/complete')
 })
