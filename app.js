@@ -49,6 +49,12 @@ var decode = function(specs){
                   name:  spec.name,
                   value: choice.toLowerCase().replace(/ /g,"_"),
                   body:  choice})})
+    else if (spec.options)
+      map(spec.options, function(option){
+        out.push({type: 'checkbox',
+                  name:  spec.name,
+                  value: option.toLowerCase().replace(/ /g,"_"),
+                  body:  option})})
     else if (typeof specs[2].text)
       out.push({type: 'text',
                 name: spec.name,
